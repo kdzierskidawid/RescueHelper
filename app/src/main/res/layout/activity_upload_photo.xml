@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_new"
+    >
+
+    <Button
+        android:text="Upload"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnUploadImage"
+        style="?android:textAppearanceSmall"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="25dp"
+        android:background="#FFA62F"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+    <Button
+        android:text="Choose from gallery"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnUploadImageFromGallery"
+        style="?android:textAppearanceSmall"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="500dp"
+        android:background="#FFA62F"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnUploadImage"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:text="Back"
+            android:id="@+id/btnBackImage"
+            style="?android:textAppearanceSmall"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:background="#FFA62F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:text="Next"
+            android:id="@+id/btnNextImage"
+            android:layout_toRightOf="@+id/btnBackImage"
+            style="?android:textAppearanceSmall"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="25dp"
+            android:background="#FFA62F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/uploadImage"
+        />
+    <EditText
+        android:layout_below="@+id/uploadImage"
+        android:id="@+id/imageName"
+        android:hint="Enter image name"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:textColor="#333333"
+        android:textColorHint="#d8d8d8"
+        android:textCursorDrawable="@null"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawablePadding="25dp"/>
+
+
+</RelativeLayout>

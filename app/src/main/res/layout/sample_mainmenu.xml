@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bright.RescueHelper.MainActivity"
+    android:background="@drawable/background_new"
+    >
+
+    <Button
+        android:layout_width="191dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="205dp"
+        android:background="#FFA62F"
+        android:onClick="showMyLocation"
+        android:text="Lokalizuj"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/Options"
+        android:layout_width="191dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="345dp"
+        android:background="#FFA62F"
+        android:onClick="showOptions"
+        android:text="Opcje mapy"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/view_profile_details"
+        android:layout_width="191dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="275dp"
+        android:background="#FFA62F"
+        android:onClick="showMyProfile"
+        android:text="My profile"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/logowanie"
+        android:layout_width="191dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/password_register"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="135dp"
+        android:background="#FFA62F"
+        android:onClick="showLogin"
+        android:text="Logowanie"
+        android:textColor="#FFFFFF" />
+
+
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FindAllUsers"
+    android:background="@drawable/background_new">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/simpleTextid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Searching for people..."
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/search_box_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="#ffffff"
+            android:drawablePadding="25dp"
+            android:hint="Search... "
+            android:paddingLeft="20dp"
+            android:textColor="#333333"
+            android:textColorHint="#d8d8d8"
+            android:textCursorDrawable="@null"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/search_people_friends_button"
+            android:layout_width="191dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="5dp"
+            android:background="#FFA62F"
+            android:text="Search"
+            android:textColor="#FFFFFF"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_result_list"
+            android:layout_margin="10dp"
+            >
+
+
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</RelativeLayout>

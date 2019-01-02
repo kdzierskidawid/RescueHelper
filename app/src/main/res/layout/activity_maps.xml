@@ -83,7 +83,25 @@
         android:text="Name"
          />
 
+        <CheckBox
+            android:id="@+id/fade_in_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:onClick="setFadeIn"
+            android:text="fade_in" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="transparency"/>
+
+        <SeekBar
+            android:id="@+id/transparencySeekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </FrameLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:alpha="0.9"
+    android:background="@drawable/background_new"
+    tools:context=".Edit_Profile_Info"
+    >
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/name_database"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawablePadding="25dp"
+                android:hint="Enter name "
+                android:paddingLeft="20dp"
+                android:textColor="#333333"
+                android:textColorHint="#d8d8d8"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/number_database"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawablePadding="25dp"
+                android:hint="Enter phone "
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:textColor="#333333"
+                android:textColorHint="#d8d8d8"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/description_database"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawablePadding="25dp"
+                android:hint="Enter description "
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:textColor="#333333"
+                android:textColorHint="#d8d8d8"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/leader_of_group_textview"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="Are You leader of the group?"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/leader_of_group_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_edittext"
+                android:drawablePadding="25dp"
+                android:hint="yes or no"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:textColor="#333333"
+                android:textColorHint="#d8d8d8"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/upload_screen"
+                style="?android:textAppearanceSmall"
+                android:layout_width="191dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="95dp"
+                android:layout_marginTop="25dp"
+                android:background="#FFA62F"
+                android:text="Upload Photo"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/profile_photo"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="191dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/password_register"
+                android:layout_marginLeft="95dp"
+                android:layout_marginTop="25dp"
+                android:background="#FFA62F"
+                android:inputType="textMultiLine"
+                android:text="SAVE"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

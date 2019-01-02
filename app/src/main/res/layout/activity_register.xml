@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    >
+    tools:context=".Register">
 
     <ScrollView
         android:id="@+id/login_form"
@@ -19,7 +19,7 @@
 
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/email_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
@@ -38,45 +38,19 @@
                 android:maxLines="1" />
 
             <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Sign In"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/email_sign_out_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Sign out"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/add_item_screen"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Add Items to Database"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/register_button"
+                android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="REGISTER" />
 
             <Button
-                android:id="@+id/view_items_screen"
+                android:id="@+id/add_item_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="View Database Contents"
-                android:textStyle="bold"/>
+                android:onClick="add_to_database"
+                android:text="Profile Details"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -49,7 +52,19 @@
             android:name=".Autocomplete"
             android:label="@string/title_activity_autocomplete"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".Login" />
+        <activity android:name=".Nav_camera" />
+        <activity android:name=".Register" />
+        <activity android:name=".MarkersInfoList" />
+        <activity android:name=".MarkersInfoDetails" />
+        <activity android:name=".AddingToDatabase" />
+        <activity android:name=".Profile_Info" />
+        <activity android:name=".Edit_Profile_Info" />
+        <activity android:name=".Online_Users" />
+        <activity android:name=".FindAllUsers" />
+        <activity android:name=".UploadPhotoActivity" />
+        <activity android:name=".UploadPhotos" />
+        <activity android:name=".PersonProfileActivity"></activity>
     </application>
 
 </manifest>
