@@ -59,6 +59,13 @@ import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.maps.model.TileProvider;
 import com.google.android.gms.maps.model.UrlTileProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.android.PolyUtil;
 
 import java.io.IOException;
@@ -74,6 +81,7 @@ import static com.example.bright.RescueHelper.MapHelper.createHole;
 import static com.example.bright.RescueHelper.MapHelper.createOuterBounds;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, SeekBar.OnSeekBarChangeListener{
+    private static final String TAG = "MapsActivity";
 
     private static final int TRANSPARENCY_MAX = 100;
     private static Context context;
@@ -87,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public HashMap <Marker, LatLng> markersInMap = new HashMap<>();
     public ArrayList<LatLng> lat = new ArrayList<LatLng>();
     public ArrayList<Integer> markers_id_list = new ArrayList<Integer>();
+    public ArrayList<LatLng> lista_polozen = new ArrayList<LatLng>();
     public static int marker_id_counter = 0;
     public ArrayList<LatLng> temp_loc = new ArrayList<LatLng>();
     public PolygonOptions options;
@@ -100,11 +109,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public List<List<LatLng>> holes = new ArrayList<>();
     public List<LatLng> hole = new ArrayList<>();
 
+    public double szerokosc;
+    public double dlugosc;
+
     private static final String MOON_MAP_URL_FORMAT =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Flag_of_Afghanistan_%281880%E2%80%931901%29.svg/2000px-Flag_of_Afghanistan_%281880%E2%80%931901%29.svg.png";
 
     private TileOverlay mMoonTiles;
     private SeekBar mTransparencyBar;
+
+    //Firebase
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
+    private String current_user_id;
+    private DatabaseReference UsersRef, FriendsRef, LocRef;
+
+    private String online_user_id;
+    public double wartosc_lat;
+    public double wartosc_lng;
+
+    PersonProfileActivity PersonProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +150,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
        //mapFragmenttwo.getMapAsync(this);
         //---------------------------------------------------------------
+
+        //Firebase
+        mAuth = FirebaseAuth.getInstance();
+        current_user_id = mAuth.getCurrentUser().getUid();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        online_user_id = mAuth.getCurrentUser().getUid();
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("users");
+        FriendsRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(online_user_id);
+        LocRef = FirebaseDatabase.getInstance().getReference().child("Friends_lozalization").child(online_user_id);
+        wartosc_lat =getIntent().getDoubleExtra("latitude",0);//0 is default value
+        wartosc_lng =getIntent().getDoubleExtra("longitude",0);//0 is default value
+        Log.d("Wziete poloenie lat", "" +wartosc_lat);
+        Log.d("Wziete poloenie lat", "" +wartosc_lng);
+
+
+
+
+        //-----------------------------------------------------
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    //toastMessage("Successfully signed in with: " + user.getEmail());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    //toastMessage("Successfully signed out.");
+                }
+                // ...
+            }
+        };
+
+
+
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         //NavigationView navigationView = findViewById(R.id.nav_view);
@@ -148,6 +214,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                         } else if (id == R.id.nav_slideshow) {
+                            startActivity(new Intent(getApplicationContext(),FriendsActivity.class));
+
 
                         } else if (id == R.id.nav_manage) {
 
@@ -169,26 +237,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
+
         // sprawdzanie pozwoleń
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         int minutes = 2000;
         int distance = 0;
+
         // wrzucanie na liste moich poprzednich lokacji
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 1, new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 //int ile = 0;
                // ile = ile + 1;
                 // pobieram szerokosc
                 mMap.setMyLocationEnabled(true); // od Marka xd
-                double szerokosc = location.getLatitude();
+                szerokosc = location.getLatitude();
 
                 // pobieram dlugosc
-                double dlugosc = location.getLongitude();
+                dlugosc = location.getLongitude();
+                SendLocationDataToFirebase();
+                latt = new LatLng(szerokosc, dlugosc);
+                lista_polozen.add(latt);
 
-                 latt = new LatLng(szerokosc, dlugosc);
+                for(int x=0; x<lista_polozen.size(); x++){
+                    Log.d("Polozenie: " + x ," Szerokość: " + lista_polozen.get(x).latitude + " Długość: " + lista_polozen.get(x).longitude);
+                }
                 //temp_loc.add(latLng);
                 List<Address> address = null;
                 Geocoder geocoder = new Geocoder(getApplicationContext());
@@ -572,8 +647,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("Przenoszę marker numer: ", ""+marker.getPosition());
 
     }*/
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    public void SendLocationDataToFirebase(){
+        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                myRef.child("users").child(current_user_id).child("latitude").setValue(szerokosc);
+                myRef.child("users").child(current_user_id).child("longitude").setValue(dlugosc);
+
+                Log.d("Wyslano do bazy polozenie o dlugosci i szerokosci: ", "" + dlugosc + " oraz " + szerokosc);
+                Log.d("Dlugosc: ", "" + dlugosc);
+                Log.d("Szerokosc: ", "" + szerokosc);
+                Double szerokosc_firebase = (dataSnapshot.child("latitude").getValue(Double.class));
+                Double dlugosc_firebase = (dataSnapshot.child("longitude").getValue(Double.class));
+
+                Log.d("Dlugosc z firebase: ", "" + dlugosc_firebase);
+                Log.d("Szerokosc z firebase: ", "" + szerokosc_firebase);
+                }
 
 
 
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getFriendLocation(){
+        LocRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                    Log.v(TAG,""+ childDataSnapshot.getKey()); //displays the key for the node
+                    Log.v(TAG,""+ childDataSnapshot.getValue());   //gives the value for given keyname
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

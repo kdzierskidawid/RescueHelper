@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="#ff9900">
+    android:background="#000033">
     
     <com.instabug.library.view.CircularImageView
         android:layout_width="85dp"
@@ -26,6 +26,33 @@
             android:textColor="#FFFFFF"
             android:textSize="15dp"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/all_users_profile_status"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="status"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/all_users_profile_lat"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="latitude"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/all_users_profile_lng"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="longitude"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

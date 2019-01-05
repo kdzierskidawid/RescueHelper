@@ -34,11 +34,12 @@ public class Login extends AppCompatActivity {
     private String userID;
     public Object test=null;
     public int logowanie =0;
-
+    public FirebaseUser user;
     // UI references.
     private EditText mEmail, mPassword;
     private Button btnSignIn,btnSignOut,btnAddItems, btnRegister, btnAddTodatabase, btnProfileInfo;
     private TextView mRegisterTExtView;
+    public int zalogowany;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class Login extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password_register);
         btnSignIn = (Button) findViewById(R.id.email_sign_in_button);
-        //btnSignOut = (Button) findViewById(R.id.email_sign_out_button);
+        btnSignOut = (Button) findViewById(R.id.btn_signout);
         //btnAddItems = (Button) findViewById(R.id.add_item_screen);
         //btnRegister = (Button) findViewById(R.id.register_button);
         //btnAddTodatabase = (Button) findViewById(R.id.add_item_screen);
@@ -57,8 +58,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
+        user = mAuth.getCurrentUser();
 
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -70,6 +70,8 @@ public class Login extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Toast toast = Toast.makeText(Login.this, "Successfully signed in with: " + user.getEmail(), Toast.LENGTH_SHORT);
                     toast.show();
+                    userID = user.getUid();
+
 
 
                 } else {
@@ -101,12 +103,12 @@ public class Login extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String email = mEmail.getText().toString();
                 String pass = mPassword.getText().toString();
                 if(!email.equals("") && !pass.equals("")){
                     mAuth.signInWithEmailAndPassword(email,pass);
                    // btnSignOut.setEnabled(true);
-                    btnSignIn.setEnabled(false);
                     Toast toast =Toast.makeText(Login.this, "Signing...", Toast.LENGTH_SHORT);
                     toast.show();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -119,6 +121,8 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+
         mRegisterTExtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,19 +130,16 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
-        /*btnSignOut.setOnClickListener(new View.OnClickListener() {
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
                 Toast toast =Toast.makeText(Login.this, "Signing Out...", Toast.LENGTH_SHORT);
                 toast.show();
-                btnSignIn.setEnabled(true);
-
+                zalogowany = 0;
             }
         });
-
+/*
         btnAddItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

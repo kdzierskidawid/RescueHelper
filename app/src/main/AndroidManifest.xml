@@ -64,7 +64,8 @@
         <activity android:name=".FindAllUsers" />
         <activity android:name=".UploadPhotoActivity" />
         <activity android:name=".UploadPhotos" />
-        <activity android:name=".PersonProfileActivity"></activity>
+        <activity android:name=".PersonProfileActivity" />
+        <activity android:name=".FriendsActivity"></activity>
     </application>
 
 </manifest>

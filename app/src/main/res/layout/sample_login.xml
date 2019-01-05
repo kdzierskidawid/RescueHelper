@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/rounded_edittext"
                 android:drawableLeft="@drawable/icon_mail"
@@ -75,6 +75,12 @@
                 android:background="#FFA62F"
                 android:text="LOGIN"
                 android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_signout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout" />
 
             <TextView
                 android:id="@+id/register_textview"

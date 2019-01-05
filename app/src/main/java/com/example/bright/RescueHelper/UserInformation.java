@@ -9,6 +9,7 @@ public class UserInformation {
     private String leader;
     private String userid;
 
+
     public UserInformation(){
 
     }
@@ -52,6 +53,4 @@ public class UserInformation {
     public void setLeader(String leader) {
         this.leader = leader;
     }
-
-
 }
